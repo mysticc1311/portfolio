@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useLanguage } from '@/lib/LanguageContext';
 import {
   Window,
   WindowHeader,
@@ -36,37 +37,13 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
-    id: 1,
+    id: 0,
     icon: '👁️',
-    title: 'VisionTrack',
-    tech: 'Python · YOLOv8 · OpenCV',
-    desc: 'Real-time multi-object tracking system using a custom-trained YOLOv8 model. Achieves 45 FPS on consumer hardware with 94% mAP on the test set.',
+    title: 'Unsynchronized Stereo Camera Calibration via Moving Drone Trajectory Tracking',
+    tech: 'Python · OpenCV',
+    desc: 'My Thesis Work. Capable of performi relative pose estimation of a calibrated static stereo system without prior temporal synchronization and without the use of a static marker, just with a simple drone.',
     status: 'Completed',
-  },
-  {
-    id: 2,
-    icon: '🧠',
-    title: 'DepthMapper',
-    tech: 'PyTorch · MiDaS · CUDA',
-    desc: 'Monocular depth estimation pipeline for autonomous navigation. Benchmarked against KITTI dataset with optimised inference for edge deployment.',
-    status: 'Completed',
-  },
-  {
-    id: 3,
-    icon: '🔬',
-    title: 'CellScan',
-    tech: 'Python · U-Net · scikit-image',
-    desc: 'Semantic segmentation of microscopy images for cell-count automation. Reduced manual annotation time by 80% in a research lab setting.',
-    status: 'In Progress',
-  },
-  {
-    id: 4,
-    icon: '📊',
-    title: 'DataPulse',
-    tech: 'Python · Pandas · FastAPI',
-    desc: 'REST API dashboard for real-time sensor data aggregation and anomaly detection, deployed on-prem for an industrial IoT client.',
-    status: 'Completed',
-  },
+  }
 ];
 
 const SKILLS = [
@@ -102,6 +79,7 @@ export default function Portfolio() {
   const [contactSent, setContactSent] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const { t, language, setLanguage } = useLanguage();
 
   return (
     <ThemeProvider theme={original}>
@@ -137,7 +115,7 @@ export default function Portfolio() {
                 justifyContent: 'space-between',
               }}
             >
-              <span>💼 Mattia Pozzi — Portfolio v1.0</span>
+              <span>💼 Portfolio v1.0</span>
               <div style={{ display: 'flex', gap: 4 }}>
                 <Button size='sm' square onClick={() => setMinimized(true)}>
                   _
@@ -158,6 +136,24 @@ export default function Portfolio() {
                   {m}
                 </Button>
               ))}
+
+              <div style={{ marginLeft: 'auto', marginRight: 8 }}>
+                <Button
+                  size='sm'
+                  active={language === 'en'}
+                  onClick={() => setLanguage('en')}
+                >
+                  ENG
+                </Button>
+                <Button
+                  size='sm'
+                  active={language === 'it'}
+                  onClick={() => setLanguage('it')}
+                >
+                  ITA
+                </Button>
+              </div>
+
             </Toolbar>
 
             <Separator />
@@ -190,50 +186,45 @@ export default function Portfolio() {
                   👤
                 </div>
                 <div>
-                  <div style={{ fontSize: 18, fontWeight: 'bold' }}>Mattia Pozzi</div>
+                  <div style={{ fontSize: 18, fontWeight: 'bold' }}>{t.hero_title}</div>
                   <div style={{ fontSize: 12, color: '#444' }}>
-                    Data Scientist &amp; Computer Vision Engineer
+                    {t.hero_subtitle}
                   </div>
                   <div style={{ fontSize: 11, marginTop: 4 }}>
-                    📍 Italy &nbsp;|&nbsp; 🎓 Computer Science &nbsp;|&nbsp; 🔬 CV / ML / AI
+                    {t.hero_location} &nbsp;|&nbsp; {t.hero_education} &nbsp;
                   </div>
                 </div>
               </Frame>
 
               {/* tabs */}
               <Tabs value={activeTab} onChange={(v) => setActiveTab(v)}>
-                <Tab value={0}>👤 About</Tab>
-                <Tab value={1}>🗂️ Projects</Tab>
-                <Tab value={2}>⚙️ Skills</Tab>
-                <Tab value={3}>📬 Contact</Tab>
+                <Tab value={0}>{t.tab_about}</Tab>
+                <Tab value={1}>{t.tab_projects}</Tab>
+                <Tab value={2}>{t.tab_skills}</Tab>
+                <Tab value={3}>{t.tab_contact}</Tab>
               </Tabs>
 
               <TabBody style={{ padding: '16px 8px', minHeight: 340 }}>
                 {/* ── ABOUT ── */}
                 {activeTab === 0 && (
                   <div>
-                    <GroupBox label='Who am I?'>
+                    <GroupBox label={t.about_title}>
                       <p style={{ fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-                        Hi! I'm <strong>Mattia Pozzi</strong>, a Data Scientist and Computer Vision
-                        engineer based in Italy. I specialise in building intelligent systems that
-                        can see, understand, and reason about the visual world — from real-time
-                        object detection pipelines to deep learning models for medical imaging.
+                        {t.about_p1}
                       </p>
                       <br />
                       <p style={{ fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-                        I'm passionate about bridging the gap between cutting-edge research and
-                        real-world applications. When I'm not training models, I enjoy exploring
-                        retro computing aesthetics — hence this portfolio 😄
+                        {t.about_p2}
                       </p>
                     </GroupBox>
                     <br />
-                    <GroupBox label='Currently'>
+                    <GroupBox label={t.about_currently}>
                       <div style={{ fontSize: 13 }}>
-                        🔭 &nbsp;Working on real-time depth estimation for robotics
+                        {t.about_currently_1}
                         <br />
-                        📖 &nbsp;Reading papers on vision-language models
+                        {t.about_currently_2}
                         <br />
-                        🛠️ &nbsp;Building open-source CV tools
+                        {t.about_currently_3}
                       </div>
                     </GroupBox>
                   </div>
@@ -249,7 +240,7 @@ export default function Portfolio() {
                           onClick={() => setSelectedProject(null)}
                           style={{ marginBottom: 12 }}
                         >
-                          ← Back
+                          {t.back_button}
                         </Button>
                         <Window style={{ width: '100%' }}>
                           <WindowHeader>
@@ -262,9 +253,9 @@ export default function Portfolio() {
                               </p>
                             </Frame>
                             <div style={{ fontSize: 12 }}>
-                              <strong>Tech stack:</strong> {selectedProject.tech}
+                              <strong>{t.tech_stack}</strong> {selectedProject.tech}
                               <br />
-                              <strong>Status:</strong>{' '}
+                              <strong>{t.status}:</strong>{' '}
                               <span
                                 style={{
                                   color: selectedProject.status === 'Completed' ? 'green' : 'navy',
@@ -274,7 +265,7 @@ export default function Portfolio() {
                               </span>
                             </div>
                             <br />
-                            <Button>🔗 View on GitHub</Button>
+                            <Button>{t.view_github}</Button>
                           </WindowContent>
                         </Window>
                       </div>
@@ -350,52 +341,52 @@ export default function Portfolio() {
                         style={{ padding: 24, textAlign: 'center' }}
                       >
                         <div style={{ fontSize: 32, marginBottom: 8 }}>📨</div>
-                        <div style={{ fontWeight: 'bold' }}>Message sent!</div>
+                        <div style={{ fontWeight: 'bold' }}>{t.contact_sent_title}</div>
                         <div style={{ fontSize: 12, marginTop: 4 }}>
-                          Thanks for reaching out. I'll get back to you soon.
+                           {t.contact_sent_desc}
                         </div>
                         <br />
-                        <Button onClick={() => setContactSent(false)}>Send another</Button>
+                        <Button onClick={() => setContactSent(false)}>{t.contact_send_another}</Button>
                       </Frame>
                     ) : (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                        <GroupBox label='Send a message'>
+                        <GroupBox label={t.contact_send_title}>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                             <div>
                               <label style={{ fontSize: 12, display: 'block', marginBottom: 3 }}>
-                                Your name
+                                {t.contact_name_label}
                               </label>
-                              <TextField placeholder='John Doe' style={{ width: '100%' }} />
+                              <TextField placeholder={t.contact_name_placeholder} style={{ width: '100%' }} />
                             </div>
                             <div>
                               <label style={{ fontSize: 12, display: 'block', marginBottom: 3 }}>
-                                Email
+                                {t.contact_email_label}
                               </label>
-                              <TextField placeholder='john@example.com' style={{ width: '100%' }} />
+                              <TextField placeholder={t.contact_email_placeholder} style={{ width: '100%' }} />
                             </div>
                             <div>
                               <label style={{ fontSize: 12, display: 'block', marginBottom: 3 }}>
-                                Message
+                                {t.contact_message_label}
                               </label>
                               <TextField
-                                placeholder='Hi Mattia, I wanted to...'
+                                placeholder={t.contact_message_placeholder}
                                 multiline
                                 rows={4}
                                 style={{ width: '100%' }}
                               />
                             </div>
                             <Button onClick={() => setContactSent(true)} style={{ alignSelf: 'flex-start' }}>
-                              📤 Send
+                              {t.contact_send_button}
                             </Button>
                           </div>
                         </GroupBox>
-                        <GroupBox label='Or find me at'>
+                        <GroupBox label={t.contact_find_title}>
                           <div style={{ fontSize: 12, lineHeight: 2 }}>
-                            📧 &nbsp;mattia@example.com
+                            📧 &nbsp;pozzi.tia@gmail.com
                             <br />
-                            🐙 &nbsp;github.com/mattiapozzi
+                            🐙 &nbsp;github.com/mysticc1311
                             <br />
-                            💼 &nbsp;linkedin.com/in/mattiapozzi
+                            💼 &nbsp;linkedin.com/in/mattia-pozzi-3030312a4/
                           </div>
                         </GroupBox>
                       </div>
@@ -429,7 +420,7 @@ export default function Portfolio() {
             onClick={() => setMinimized(false)}
             style={{ height: 28, fontSize: 12 }}
           >
-            💼 Mattia Pozzi — Portfolio
+            💼 {t.hero_title} - Portfolio
           </Button>
           <div style={{ flex: 1 }} />
           <Frame
