@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="it">
       <body>
         <GlobalStyles />
         <ThemeProvider theme={original}>

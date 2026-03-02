@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import {
   Window,
@@ -23,6 +23,7 @@ import {
 } from 'react95';
 import { ThemeProvider } from 'styled-components';
 import original from 'react95/dist/themes/original';
+import Image from 'next/image'
 
 type Project = {
   id: number;
@@ -33,9 +34,13 @@ type Project = {
   status: string;
   link: string;
 };
+declare global {
+  interface Window {
+    onTurnstileSuccess: (token: string) => void;
+  }
+}
 
 // ── data ────────────────────────────────────────────────────────────────────
-
 const PROJECTS: Project[] = [
   {
     id: 0,
@@ -67,18 +72,14 @@ const PROJECTS: Project[] = [
 ];
 
 const SKILLS = [
-  { label: 'Python', value: 95 },
-  { label: 'Computer Vision', value: 90 },
-  { label: 'PyTorch / TensorFlow', value: 85 },
-  { label: 'OpenCV', value: 88 },
-  { label: 'Data Analysis', value: 80 },
-  { label: 'SQL / NoSQL', value: 70 },
-  { label: 'Docker / Linux', value: 72 },
-  { label: 'React / Next.js', value: 60 },
+  { label: 'Python', value: 80 },
+  { label: 'MATLAB', value: 75 },
+  { label: 'OOP (Java, C#)', value: 85 },
+  { label: 'SQL', value: 70 },
+  { label: 'NoSQL (MongoDB, Neo4J, ElasticSearch)', value: 60 },
 ];
 
 // ── tiny clock ───────────────────────────────────────────────────────────────
-
 function Clock() {
   const [time, setTime] = useState(new Date());
   // update every second
@@ -93,13 +94,39 @@ function Clock() {
 }
 
 // ── main component ───────────────────────────────────────────────────────────
-
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState(0);
   const [contactSent, setContactSent] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const { t, language, setLanguage } = useLanguage();
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formLoading, setFormLoading] = useState(false);
+
+  // submit function
+  const handleContactSubmit = async () => {
+    setFormLoading(true);
+  
+    const data = new FormData();
+    data.append("access_key", "d0954c9b-3d02-4042-9c60-b38d8a1cd6d4");
+    data.append("name", formData.name);
+    data.append("email", formData.email);
+    data.append("message", formData.message);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: data
+    });
+
+    const result = await response.json();
+    setFormLoading(false);
+  
+    if (result.success) {
+      setContactSent(true);
+    } else {
+      alert("Errore nell'invio. Riprova.");
+    }
+  };
 
   return (
     <ThemeProvider theme={original}>
@@ -135,7 +162,7 @@ export default function Portfolio() {
                 justifyContent: 'space-between',
               }}
             >
-              <span>💼 Portfolio v1.0</span>
+              <span>📃 Portfolio v1.0</span>
               <div style={{ display: 'flex', gap: 4 }}>
                 <Button size='sm' square onClick={() => setMinimized(true)}>
                   _
@@ -192,8 +219,8 @@ export default function Portfolio() {
               >
                 <div
                   style={{
-                    width: 56,
-                    height: 56,
+                    width: 128,
+                    height: 128,
                     background: '#000080',
                     border: '2px solid #fff',
                     display: 'flex',
@@ -203,14 +230,19 @@ export default function Portfolio() {
                     flexShrink: 0,
                   }}
                 >
-                  👤
+                  <Image
+                    src="/res/propic.jpg"
+                    alt="Profile"
+                    width={128}
+                    height={128}
+                  />
                 </div>
                 <div>
-                  <div style={{ fontSize: 18, fontWeight: 'bold' }}>{t.hero_title}</div>
-                  <div style={{ fontSize: 12, color: '#444' }}>
+                  <div style={{ fontSize: 24, fontWeight: 'bold' }}>{t.hero_title}</div>
+                  <div style={{ fontSize: 18, color: '#444' }}>
                     {t.hero_subtitle}
                   </div>
-                  <div style={{ fontSize: 11, marginTop: 4 }}>
+                  <div style={{ fontSize: 14, marginTop: 4 }}>
                     {t.hero_location} &nbsp;|&nbsp; {t.hero_education} @ <a href='https://www.polimi.it'>Polimi</a> &nbsp;
                   </div>
                 </div>
@@ -229,17 +261,17 @@ export default function Portfolio() {
                 {activeTab === 0 && (
                   <div>
                     <GroupBox label={t.about_title}>
-                      <p style={{ fontSize: 13, lineHeight: 1.7, margin: 0 }}>
+                      <p style={{ fontSize: 18, lineHeight: 1.7, margin: 0 }}>
                         {t.about_p1}
                       </p>
                       <br />
-                      <p style={{ fontSize: 13, lineHeight: 1.7, margin: 0 }}>
+                      <p style={{ fontSize: 18, lineHeight: 1.7, margin: 0 }}>
                         {t.about_p2}
                       </p>
                     </GroupBox>
                     <br />
                     <GroupBox label={t.about_currently}>
-                      <div style={{ fontSize: 13 }}>
+                      <div style={{ fontSize: 18 }}>
                         {t.about_currently_1}
                       </div>
                     </GroupBox>
@@ -264,11 +296,11 @@ export default function Portfolio() {
                           </WindowHeader>
                           <WindowContent>
                             <Frame variant='well' style={{ padding: 12, marginBottom: 12 }}>
-                              <p style={{ margin: 0, fontSize: 13, lineHeight: 1.7 }}>
+                              <p style={{ margin: 0, fontSize: 18, lineHeight: 1.7 }}>
                                 {selectedProject.desc}
                               </p>
                             </Frame>
-                            <div style={{ fontSize: 12 }}>
+                            <div style={{ fontSize: 18 }}>
                               <strong>{t.tech_stack}</strong> {selectedProject.tech}
                               <br />
                               <strong>{t.status}:</strong>{' '}
@@ -289,7 +321,7 @@ export default function Portfolio() {
                       <div
                         style={{
                           display: 'grid',
-                          gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
+                          gridTemplateColumns: 'repeat(auto-fill, minmax(256px, 1fr))',
                           gap: 12,
                         }}
                       >
@@ -309,11 +341,11 @@ export default function Portfolio() {
                             }}
                           >
                             <div style={{ fontSize: 24 }}>{p.icon}</div>
-                            <div style={{ fontWeight: 'bold', fontSize: 13, minHeight: 60 }}>{p.title}</div>
-                            <div style={{ fontSize: 10, color: '#555' }}>{p.tech}</div>
+                            <div style={{ fontWeight: 'bold', fontSize: 18, minHeight: 128 }}>{p.title}</div>
+                            <div style={{ fontSize: 12, color: '#555' }}>{p.tech}</div>
                             <div
                               style={{
-                                fontSize: 10,
+                                fontSize: 12,
                                 color: p.status === 'Completed' ? 'green' : 'navy',
                               }}
                             >
@@ -354,34 +386,44 @@ export default function Portfolio() {
                     {contactSent ? (
                       <Frame
                         variant='well'
-                        style={{ padding: 24, textAlign: 'center' }}
+                        style={{ padding: 24, textAlign: 'center', width: '100%', height: '100%' }}
                       >
                         <div style={{ fontSize: 32, marginBottom: 8 }}>📨</div>
                         <div style={{ fontWeight: 'bold' }}>{t.contact_sent_title}</div>
-                        <div style={{ fontSize: 12, marginTop: 4 }}>
+                        <div style={{ fontSize: 18, marginTop: 4 }}>
                            {t.contact_sent_desc}
                         </div>
                         <br />
-                        <Button onClick={() => setContactSent(false)}>{t.contact_send_another}</Button>
+                        <Button style={{ marginBottom: 64 }}onClick={() => setContactSent(false)}>{t.contact_send_another}</Button>
                       </Frame>
                     ) : (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                         <GroupBox label={t.contact_send_title}>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                             <div>
-                              <label style={{ fontSize: 12, display: 'block', marginBottom: 3 }}>
+                              <label style={{ fontSize: 18, display: 'block', marginBottom: 3 }}>
                                 {t.contact_name_label}
                               </label>
-                              <TextField placeholder={t.contact_name_placeholder} style={{ width: '100%' }} />
+                              <TextField
+                                placeholder={t.contact_name_placeholder}
+                                style={{ width: '100%' }}
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                              />
                             </div>
                             <div>
-                              <label style={{ fontSize: 12, display: 'block', marginBottom: 3 }}>
+                              <label style={{ fontSize: 18, display: 'block', marginBottom: 3 }}>
                                 {t.contact_email_label}
                               </label>
-                              <TextField placeholder={t.contact_email_placeholder} style={{ width: '100%' }} />
+                              <TextField
+                                placeholder={t.contact_email_placeholder}
+                                style={{ width: '100%' }}
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                              />
                             </div>
                             <div>
-                              <label style={{ fontSize: 12, display: 'block', marginBottom: 3 }}>
+                              <label style={{ fontSize: 18, display: 'block', marginBottom: 3 }}>
                                 {t.contact_message_label}
                               </label>
                               <TextField
@@ -389,15 +431,21 @@ export default function Portfolio() {
                                 multiline
                                 rows={4}
                                 style={{ width: '100%' }}
+                                value={formData.message}
+                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                               />
                             </div>
-                            <Button onClick={() => setContactSent(true)} style={{ alignSelf: 'flex-start' }}>
-                              {t.contact_send_button}
+                            <Button
+                              onClick={handleContactSubmit}
+                              disabled={formLoading}
+                              style={{ alignSelf: 'flex-start' }}
+                            >
+                              {formLoading ? <Hourglass size={16} /> : t.contact_send_button}
                             </Button>
                           </div>
                         </GroupBox>
                         <GroupBox label={t.contact_find_title}>
-                          <div style={{ fontSize: 12, lineHeight: 2 }}>
+                          <div style={{ fontSize: 18, lineHeight: 2 }}>
                             📧 &nbsp;pozzi.tia@gmail.com
                             <br />
                             🐙 &nbsp;github.com/mysticc1311
@@ -434,9 +482,9 @@ export default function Portfolio() {
           <Button
             active={!minimized}
             onClick={() => setMinimized(false)}
-            style={{ height: 28, fontSize: 12 }}
+            style={{ height: 28, fontSize: 18 }}
           >
-            💼 {t.hero_title} - Portfolio
+            📃 {t.hero_title} - Portfolio
           </Button>
           <div style={{ flex: 1 }} />
           <Frame
