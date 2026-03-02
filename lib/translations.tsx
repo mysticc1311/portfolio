@@ -4,7 +4,7 @@ export const translations = {
     hero_title: 'Mattia Pozzi',
     hero_subtitle: 'Computer Engineer',
     hero_location: '📍 Italy',
-    hero_education: '🎓 Master Degree in Computer Science and Engineering @ Polimi',
+    hero_education: '🎓 Master Degree in Computer Science and Engineering',
 
     // tabs
     tab_about: '👤 About',
@@ -14,12 +14,10 @@ export const translations = {
 
     // about
     about_title: 'Who am I?',
-    about_p1: "Hi! I'm Mattia Pozzi, a computer engineer based in Italy. I specialise in Data Science and Computer Vision.",
-    about_p2: "I'm passionate about bridging the gap between cutting-edge research and real-world applications. When I'm not training models, I enjoy exploring retro computing aesthetics — hence this portfolio 😄",
+    about_p1: "Hi! I'm Mattia, and I graduated in Computer Science and Engineering from the Politecnico di Milano, with a Master's specialization in Machine Learning, Data Mining, and Computer Vision. I am particularly interested in Computer Vision, where I aim to apply machine learning models and image processing techniques to develop intelligent and scalable systems. I have a solid programming background in various languages, which allows me to combine AI expertise with strong engineering foundations and a focus on software quality.",
+    about_p2: "I am passionate about computers 🖥️, new technologies 🚀, and photography 📷.",
     about_currently: 'Currently',
-    about_currently_1: '🔭 Working on real-time depth estimation for robotics',
-    about_currently_2: '📖 Reading papers on vision-language models',
-    about_currently_3: '🛠️ Building open-source CV tools',
+    about_currently_1: '🛠️ Working on this portfolio',
 
     // projects
     back_button: '← Back',
@@ -46,7 +44,7 @@ export const translations = {
     hero_title: 'Mattia Pozzi',
     hero_subtitle: 'Ingegnere Informatico',
     hero_location: '📍 Italia',
-    hero_education: '🎓 Laure Magistrale in Ingegneria Informatica @ Polimi',
+    hero_education: '🎓 Laure Magistrale in Ingegneria Informatica',
 
     // tabs
     tab_about: '👤 Chi sono',
@@ -56,12 +54,10 @@ export const translations = {
 
     // about
     about_title: 'Chi sono?',
-    about_p1: "Ciao! Sono Mattia Pozzi, un Data Scientist e ingegnere di Computer Vision con base in Italia. Mi specializzo nella costruzione di sistemi intelligenti in grado di vedere, comprendere e ragionare sul mondo visivo — dai pipeline di rilevamento oggetti in tempo reale ai modelli di deep learning per l'imaging medico.",
-    about_p2: "Sono appassionato di colmare il divario tra la ricerca all'avanguardia e le applicazioni del mondo reale. Quando non alleno modelli, mi piace esplorare l'estetica del retro computing — da qui questo portfolio 😄",
+    about_p1: "Ciao! Io sono Mattia, mi sono laureato in Ingegneria Informatica presso il Politecnico di Milano, con specializzazione magistrale in Machine Learning, Data Mining e Computer Vision. Mi interessa in particolare la Computer Vision, ambito in cui desidero applicare modelli di apprendimento automatico e tecniche di elaborazione delle immagini per lo sviluppo di sistemi intelligenti e scalabili. Ho un solido background di programmazione in vari linguaggi che mi consente di integrare competenze di AI con una solida base ingegneristica e attenzione alla qualità del software.",
+    about_p2: "Sono appassionato di computer 🖥️, nuove tecnologie 🚀 e di fotografia 📷.",
     about_currently: 'Attualmente',
-    about_currently_1: '🔭 Lavoro sulla stima della profondità in tempo reale per la robotica',
-    about_currently_2: '📖 Leggo paper sui modelli vision-language',
-    about_currently_3: '🛠️ Costruisco strumenti CV open-source',
+    about_currently_1: '🛠️ Lavoro a questo portfolio',
 
     // projects
     back_button: '← Indietro',

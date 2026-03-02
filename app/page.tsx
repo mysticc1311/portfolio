@@ -31,6 +31,7 @@ type Project = {
   tech: string;
   desc: string;
   status: string;
+  link: string;
 };
 
 // ── data ────────────────────────────────────────────────────────────────────
@@ -38,11 +39,30 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     id: 0,
-    icon: '👁️',
+    icon: '🚁',
     title: 'Unsynchronized Stereo Camera Calibration via Moving Drone Trajectory Tracking',
     tech: 'Python · OpenCV',
-    desc: 'My Thesis Work. Capable of performi relative pose estimation of a calibrated static stereo system without prior temporal synchronization and without the use of a static marker, just with a simple drone.',
+    desc: 'My Thesis Work. This thesis addresses the problem of estimating the relative pose between two cameras in a static stereo system without requiring temporal synchronization or static calibration patterns. Traditional calibration methods rely on structured targets or distinctive scene features and assume synchronized acquisition, which limits their applicability in uncontrolled environments. We propose a novel calibration method based on a moving drone equipped with a LED light. Instead of exploiting spatial correspondences from static patterns, the method leverages the trajectory of a single luminous point observed by both cameras. The approach compensates for unknown time offsets and frame rate differences and recovers the relative rotation and translation between the cameras. Temporal alignment is achieved using distinctive events such as LED blinking patterns or self-intersections in the trajectories. The method is validated through both simulated and real-world experiments under challenging lighting conditions and in the presence of motion noise. Results demonstrate accurate and stable pose estimation despite temporal misalignment and imperfect drone motion. The proposed approach provides a practical calibration solution for stereo systems operating in environments where traditional marker-based techniques are difficult to deploy.',
     status: 'Completed',
+    link: 'https://github.com/mysticc1311/calidrone.git',
+  },
+  {
+    id: 1,
+    icon: '🎥',
+    title: 'Single Image Camera Calibration using Three Orthogonal ChArUco Boards',
+    tech: 'Python · OpenCV',
+    desc: 'Made as part of the Image Analysis and Computer Vision course. This projects presents a calibration algorithm capable of performing both intrinsic and extrinsic camera calibration using a single image of a calibration target composed of three orthogonal ChArUco boards, which are a combination of chessboard patterns and ArUco markers. The algorithm is based on Zhang’s calibration method and leverages the orthogonality of the planes and the corners of the boards to estimate the camera parameters. To assess the quality of the algorithm the results are compared with those obtained using the standard OpenCV calibration functions, which rely on multiple images. The purpose of this project is to demonstrate the feasibility of achieving accurate results while reducing the time and effort required for calibration.',
+    status: 'Completed',
+    link: 'https://github.com/mysticc1311/calibration-custom.git',
+  },
+  {
+    id: 2,
+    icon: '📝',
+    title: 'Rapportini',
+    tech: 'React Native',
+    desc: 'The app allows users to create, edit, store, and send short work reports related to on-site client activities (e.g., time spent, type of intervention, operational notes). Data is stored locally on the device in an organized and easily accessible structure. The application also includes an export and email-sending feature directly from within the app. The project was developed with a strong focus on usability, fast data entry, and workflow optimization for field technicians and professionals.',
+    status: 'Early Stages',
+    link: 'https://github.com/mysticc1311/rapportini.git',
   }
 ];
 
@@ -191,7 +211,7 @@ export default function Portfolio() {
                     {t.hero_subtitle}
                   </div>
                   <div style={{ fontSize: 11, marginTop: 4 }}>
-                    {t.hero_location} &nbsp;|&nbsp; {t.hero_education} &nbsp;
+                    {t.hero_location} &nbsp;|&nbsp; {t.hero_education} @ <a href='https://www.polimi.it'>Polimi</a> &nbsp;
                   </div>
                 </div>
               </Frame>
@@ -221,10 +241,6 @@ export default function Portfolio() {
                     <GroupBox label={t.about_currently}>
                       <div style={{ fontSize: 13 }}>
                         {t.about_currently_1}
-                        <br />
-                        {t.about_currently_2}
-                        <br />
-                        {t.about_currently_3}
                       </div>
                     </GroupBox>
                   </div>
@@ -243,7 +259,7 @@ export default function Portfolio() {
                           {t.back_button}
                         </Button>
                         <Window style={{ width: '100%' }}>
-                          <WindowHeader>
+                          <WindowHeader style={{ fontSize: 18 }}>
                             {selectedProject.icon} {selectedProject.title}
                           </WindowHeader>
                           <WindowContent>
@@ -265,7 +281,7 @@ export default function Portfolio() {
                               </span>
                             </div>
                             <br />
-                            <Button>{t.view_github}</Button>
+                            <Button onClick={() => window.open(selectedProject.link, '_blank')}>{t.view_github}</Button>
                           </WindowContent>
                         </Window>
                       </div>
@@ -293,7 +309,7 @@ export default function Portfolio() {
                             }}
                           >
                             <div style={{ fontSize: 24 }}>{p.icon}</div>
-                            <div style={{ fontWeight: 'bold', fontSize: 13 }}>{p.title}</div>
+                            <div style={{ fontWeight: 'bold', fontSize: 13, minHeight: 60 }}>{p.title}</div>
                             <div style={{ fontSize: 10, color: '#555' }}>{p.tech}</div>
                             <div
                               style={{
