@@ -12,6 +12,11 @@ export const translations = {
     tab_skills: '⚙️ Skills',
     tab_contact: '📬 Contact',
 
+    tab_about_mobile: '👤',
+    tab_projects_mobile: '🗂️',
+    tab_skills_mobile: '⚙️',
+    tab_contact_mobile: '📬',
+
     // about
     about_title: 'Who am I?',
     about_p1: "Hi! I'm Mattia, and I graduated in Computer Science and Engineering from the Politecnico di Milano, with a Master's specialization in Machine Learning, Data Mining, and Computer Vision. I am particularly interested in Computer Vision, where I aim to apply machine learning models and image processing techniques to develop intelligent and scalable systems. I have a solid programming background in various languages, which allows me to combine AI expertise with strong engineering foundations and a focus on software quality.",
@@ -51,6 +56,11 @@ export const translations = {
     tab_projects: '🗂️ Progetti',
     tab_skills: '⚙️ Competenze',
     tab_contact: '📬 Contatti',
+
+    tab_about_mobile: '👤',
+    tab_projects_mobile: '🗂️',
+    tab_skills_mobile: '⚙️',
+    tab_contact_mobile: '📬',
 
     // about
     about_title: 'Chi sono?',

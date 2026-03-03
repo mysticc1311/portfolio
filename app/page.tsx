@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect} from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import {
   Window,
   WindowHeader,
@@ -102,6 +103,7 @@ export default function Portfolio() {
   const { t, language, setLanguage } = useLanguage();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formLoading, setFormLoading] = useState(false);
+  const isMobile = useIsMobile();
 
   // submit function
   const handleContactSubmit = async () => {
@@ -250,10 +252,10 @@ export default function Portfolio() {
 
               {/* tabs */}
               <Tabs value={activeTab} onChange={(v) => setActiveTab(v)}>
-                <Tab value={0}>{t.tab_about}</Tab>
-                <Tab value={1}>{t.tab_projects}</Tab>
-                <Tab value={2}>{t.tab_skills}</Tab>
-                <Tab value={3}>{t.tab_contact}</Tab>
+                <Tab value={0}>{isMobile ? t.tab_about_mobile : t.tab_about}</Tab>
+                <Tab value={1}>{isMobile ? t.tab_projects_mobile : t.tab_projects}</Tab>
+                <Tab value={2}>{isMobile ? t.tab_skills_mobile : t.tab_skills}</Tab>
+                <Tab value={3}>{isMobile ? t.tab_contact_mobile : t.tab_contact}</Tab>
               </Tabs>
 
               <TabBody style={{ padding: '16px 8px', minHeight: 340 }}>
@@ -292,7 +294,7 @@ export default function Portfolio() {
                         </Button>
                         <Window style={{ width: '100%' }}>
                           <WindowHeader style={{ fontSize: 18 }}>
-                            {selectedProject.icon} {selectedProject.title}
+                            {selectedProject.icon} {isMobile ? '' : selectedProject.title}
                           </WindowHeader>
                           <WindowContent>
                             <Frame variant='well' style={{ padding: 12, marginBottom: 12 }}>
