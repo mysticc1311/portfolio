@@ -50,7 +50,7 @@ const PROJECTS: Project[] = [
     tech: 'Python · OpenCV',
     desc: 'My Thesis Work. This thesis addresses the problem of estimating the relative pose between two cameras in a static stereo system without requiring temporal synchronization or static calibration patterns. Traditional calibration methods rely on structured targets or distinctive scene features and assume synchronized acquisition, which limits their applicability in uncontrolled environments. We propose a novel calibration method based on a moving drone equipped with a LED light. Instead of exploiting spatial correspondences from static patterns, the method leverages the trajectory of a single luminous point observed by both cameras. The approach compensates for unknown time offsets and frame rate differences and recovers the relative rotation and translation between the cameras. Temporal alignment is achieved using distinctive events such as LED blinking patterns or self-intersections in the trajectories. The method is validated through both simulated and real-world experiments under challenging lighting conditions and in the presence of motion noise. Results demonstrate accurate and stable pose estimation despite temporal misalignment and imperfect drone motion. The proposed approach provides a practical calibration solution for stereo systems operating in environments where traditional marker-based techniques are difficult to deploy.',
     status: 'Completed',
-    link: 'https://github.com/mysticc1311/calidrone.git',
+    link: '',
   },
   {
     id: 1,
@@ -128,6 +128,13 @@ export default function Portfolio() {
     } else {
       alert("Errore nell'invio. Riprova.");
     }
+  };
+
+  // skills function
+  const getLevel = (value: number) => {
+    if (value <= 60) return 'Beginner';
+    if (value <= 90) return 'Intermediate';
+    return 'Expert';
   };
 
   return (
@@ -315,7 +322,12 @@ export default function Portfolio() {
                               </span>
                             </div>
                             <br />
-                            <Button onClick={() => window.open(selectedProject.link, '_blank')}>{t.view_github}</Button>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <Button disabled={selectedProject.link == ''} onClick={() => window.open(selectedProject.link, '_blank')}>
+                                {t.view_github}
+                              </Button>
+                              {selectedProject.link == '' && <p style={{ margin: 0 }}>{t.private_project}</p>}
+                            </div>
                           </WindowContent>
                         </Window>
                       </div>
@@ -374,7 +386,7 @@ export default function Portfolio() {
                           }}
                         >
                           <span>{s.label}</span>
-                          <span>{s.value}%</span>
+                          <span>{getLevel(s.value)}</span>
                         </div>
                         <ProgressBar value={s.value} />
                       </div>

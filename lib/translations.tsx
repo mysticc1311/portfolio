@@ -29,6 +29,7 @@ export const translations = {
     tech_stack: 'Tech stack:',
     status: 'Status:',
     view_github: '🔗 View on GitHub',
+    private_project: 'The repository is private',
 
     // contact
     contact_send_title: 'Send a message',
@@ -74,6 +75,7 @@ export const translations = {
     tech_stack: 'Stack tecnologico:',
     status: 'Stato:',
     view_github: '🔗 Vedi su GitHub',
+    private_project: 'La repository è privata',
 
     // contact
     contact_send_title: 'Invia un messaggio',
