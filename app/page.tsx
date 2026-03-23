@@ -46,7 +46,7 @@ const PROJECTS: Project[] = [
   {
     id: 0,
     icon: '🚁',
-    title: 'Unsynchronized Stereo Camera Calibration via Moving Drone Trajectory Tracking',
+    title: 'Unsynchronized Stereo Camera Calibration via Drone Trajectory Tracking',
     tech: 'Python · OpenCV',
     desc: 'My Thesis Work. This thesis addresses the problem of estimating the relative pose between two cameras in a static stereo system without requiring temporal synchronization or static calibration patterns. Traditional calibration methods rely on structured targets or distinctive scene features and assume synchronized acquisition, which limits their applicability in uncontrolled environments. We propose a novel calibration method based on a moving drone equipped with a LED light. Instead of exploiting spatial correspondences from static patterns, the method leverages the trajectory of a single luminous point observed by both cameras. The approach compensates for unknown time offsets and frame rate differences and recovers the relative rotation and translation between the cameras. Temporal alignment is achieved using distinctive events such as LED blinking patterns or self-intersections in the trajectories. The method is validated through both simulated and real-world experiments under challenging lighting conditions and in the presence of motion noise. Results demonstrate accurate and stable pose estimation despite temporal misalignment and imperfect drone motion. The proposed approach provides a practical calibration solution for stereo systems operating in environments where traditional marker-based techniques are difficult to deploy.',
     status: 'Completed',
@@ -462,9 +462,9 @@ export default function Portfolio() {
                           <div style={{ fontSize: 18, lineHeight: 2 }}>
                             📧 &nbsp; pozzi.tia@gmail.com
                             <br />
-                            🐙 &nbsp; <a href='github.com/mysticc1311'>github.com/mysticc1311</a>
+                            🐙 &nbsp; <a href='www.github.com/mysticc1311'>github.com/mysticc1311</a>
                             <br />
-                            💼 &nbsp; <a href='linkedin.com/in/mattia-pozzi-3030312a4/'>linkedin.com/in/mattia-pozzi-3030312a4/</a>
+                            💼 &nbsp; <a href='www.linkedin.com/in/mattia-pozzi-3030312a4/'>linkedin.com/in/mattia-pozzi-3030312a4/</a>
                           </div>
                         </GroupBox>
                       </div>
