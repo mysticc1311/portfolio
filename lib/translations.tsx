@@ -22,7 +22,7 @@ export const translations = {
     about_p1: "Hi! I'm Mattia, and I graduated in Computer Science and Engineering from the Politecnico di Milano, with a Master's specialization in Machine Learning, Data Mining, and Computer Vision. I am particularly interested in Computer Vision, where I aim to apply machine learning models and image processing techniques to develop intelligent and scalable systems. I have a solid programming background in various languages, which allows me to combine AI expertise with strong engineering foundations and a focus on software quality.",
     about_p2: "I am passionate about computers 🖥️, new technologies 🚀, and photography 📷.",
     about_currently: 'Currently',
-    about_currently_1: '🛠️ Working on this portfolio',
+    about_currently_1: '🛠️ Working on rapportini',
 
     // projects
     back_button: '← Back',
@@ -50,7 +50,7 @@ export const translations = {
     hero_title: 'Mattia Pozzi',
     hero_subtitle: 'Ingegnere Informatico',
     hero_location: '📍 Italia',
-    hero_education: '🎓 Laure Magistrale in Ingegneria Informatica',
+    hero_education: '🎓 Laurea Magistrale in Ingegneria Informatica',
 
     // tabs
     tab_about: '👤 Chi sono',
@@ -68,7 +68,7 @@ export const translations = {
     about_p1: "Ciao! Io sono Mattia, mi sono laureato in Ingegneria Informatica presso il Politecnico di Milano, con specializzazione magistrale in Machine Learning, Data Mining e Computer Vision. Mi interessa in particolare la Computer Vision, ambito in cui desidero applicare modelli di apprendimento automatico e tecniche di elaborazione delle immagini per lo sviluppo di sistemi intelligenti e scalabili. Ho un solido background di programmazione in vari linguaggi che mi consente di integrare competenze di AI con una solida base ingegneristica e attenzione alla qualità del software.",
     about_p2: "Sono appassionato di computer 🖥️, nuove tecnologie 🚀 e di fotografia 📷.",
     about_currently: 'Attualmente',
-    about_currently_1: '🛠️ Lavoro a questo portfolio',
+    about_currently_1: '🛠️ Lavoro a rapportini',
 
     // projects
     back_button: '← Indietro',

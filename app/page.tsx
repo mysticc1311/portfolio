@@ -67,7 +67,7 @@ const PROJECTS: Project[] = [
     title: 'Rapportini',
     tech: 'React Native',
     desc: 'The app allows users to create, edit, store, and send short work reports related to on-site client activities (e.g., time spent, type of intervention, operational notes). Data is stored locally on the device in an organized and easily accessible structure. The application also includes an export and email-sending feature directly from within the app. The project was developed with a strong focus on usability, fast data entry, and workflow optimization for field technicians and professionals.',
-    status: 'Early Stages',
+    status: 'In Development',
     link: 'https://github.com/mysticc1311/rapportini.git',
   }
 ];
@@ -460,11 +460,11 @@ export default function Portfolio() {
                         </GroupBox>
                         <GroupBox label={t.contact_find_title}>
                           <div style={{ fontSize: 18, lineHeight: 2 }}>
-                            📧 &nbsp;pozzi.tia@gmail.com
+                            📧 &nbsp; pozzi.tia@gmail.com
                             <br />
-                            🐙 &nbsp;github.com/mysticc1311
+                            🐙 &nbsp; <a href='github.com/mysticc1311'>github.com/mysticc1311</a>
                             <br />
-                            💼 &nbsp;linkedin.com/in/mattia-pozzi-3030312a4/
+                            💼 &nbsp; <a href='linkedin.com/in/mattia-pozzi-3030312a4/'>linkedin.com/in/mattia-pozzi-3030312a4/</a>
                           </div>
                         </GroupBox>
                       </div>
